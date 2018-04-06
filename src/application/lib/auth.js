@@ -33,13 +33,17 @@ async function generateToken (Parametro, usuario, permissions) {
   // Generando token
   let token;
   let exp = await Parametro.getParam('JWT_TOKEN_EXPIRATION');
-  console.log('Tiempo del token en minutos:', exp.valor);
-  exp = Math.floor(Date.now() / 1000) + (parseInt(exp.valor) * 60);
-  token = await sign({
-    usuario,
-    permissions,
-    exp
-  }, config.auth.secret);
+  if (exp && exp.valor) {
+    console.log('Tiempo del token en minutos:', exp.valor);
+    exp = Math.floor(Date.now() / 1000) + (parseInt(exp.valor) * 60);
+    token = await sign({
+      usuario,
+      permissions,
+      exp
+    }, config.auth.secret);
+  } else {
+    throw new Error('No existe el parámetro JWT_TOKEN_EXPIRATION');
+  }
 
   return token;
 }

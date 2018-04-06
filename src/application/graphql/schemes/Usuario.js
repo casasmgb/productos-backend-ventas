@@ -80,11 +80,22 @@ module.exports = `
     usuario: String!
     contrasena: String!
     email: String
-    tour: JSON
     cargo: String
     id_entidad: Int!
     id_rol: Int!
-    id_persona: Int!
+    nombres: String!
+    primer_apellido: String
+    segundo_apellido: String
+    nombre_completo: String
+    tipo_documento: TipoDocPersona!
+    tipo_documento_otro: String
+    nro_documento: String!
+    fecha_nacimiento: Date!
+    movil: String
+    nacionalidad: String
+    pais_nacimiento: String
+    genero: GeneroPersona
+    telefono: String
   }
 
   # Objeto para editar un usuario
@@ -97,6 +108,20 @@ module.exports = `
     id_entidad: Int
     id_rol: Int
     id_persona: Int
+    nombres: String
+    primer_apellido: String
+    segundo_apellido: String
+    nombre_completo: String
+    tipo_documento: TipoDocPersona
+    tipo_documento_otro: String
+    nro_documento: String
+    fecha_nacimiento: Date
+    movil: String
+    nacionalidad: String
+    pais_nacimiento: String
+    genero: GeneroPersona
+    telefono: String    
+    estado_persona: EstadoPersona
   }
 
   # Objeto de paginación para usuario

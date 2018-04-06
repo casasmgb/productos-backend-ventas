@@ -37,6 +37,17 @@ module.exports = function setupResolver (services) {
         let item = await Usuario.createOrUpdate(args.usuario);
         return removeDots(item.data);
       },
+
+      usuarioUpdate: async (_, args, context) => {
+        permissions(context, 'usuarios:update');
+
+        args.usuario._user_updated = context.id_usuario;
+        args.usuario._updated_at = new Date();
+        args.usuario.id = args.id;
+        let item = await Usuario.update(args.usuario);
+        return removeDots(item.data);
+      },
+
       usuarioDelete: async (_, args, context) => {
         permissions(context, 'usuarios:delete');
 

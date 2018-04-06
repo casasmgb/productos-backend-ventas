@@ -3,6 +3,7 @@
 const test = require('ava');
 const { errors, config } = require('common');
 const domain = require('../');
+const { text } = require('common');
 
 let services;
 
@@ -76,9 +77,21 @@ test.serial('Usuario#createOrUpdate - new', async t => {
     estado: 'ACTIVO',
     id_rol: 1,
     id_entidad: 1,
-    id_persona: 1,
     _user_created: 1,
-    _created_at: new Date()
+    _created_at: new Date(),
+    nombres: 'Juan',
+    primer_apellido: 'Flores',
+    segundo_apellido: 'Ramirez',
+    nombre_completo: '',
+    tipo_documento: 'CI',
+    tipo_documento_otro: '',
+    nro_documento: '123456',
+    fecha_nacimiento: new Date(1990, 0, 1),
+    movil: '123',
+    nacionalidad: 'BOLIVIA',
+    pais_nacimiento: 'BOLIVIA',
+    genero: 'M',
+    telefono: '456'
   };
 
   let res = await Usuario.createOrUpdate(nuevoUsuario);
@@ -88,8 +101,7 @@ test.serial('Usuario#createOrUpdate - new', async t => {
   t.true(typeof usuario.id === 'number', 'Comprobando que el nuevo usuario tenga un id');
   t.is(usuario.usuario, nuevoUsuario.usuario, 'Creando registro - usuario');
   t.is(usuario.email, nuevoUsuario.email, 'Creando registro - email');
-  t.is(usuario.contrasena, nuevoUsuario.contrasena, 'Creando registro - contraseña');
-  t.is(usuario.nombres, nuevoUsuario.nombres, 'Creando registro - nombres');
+  t.is(usuario.contrasena, text.encrypt(nuevoUsuario.contrasena), 'Creando registro - contraseña');
   t.is(res.message, 'OK', 'Mensaje correcto');
 
   test.idUser = usuario.id;
@@ -101,11 +113,13 @@ test.serial('Usuario#createOrUpdate - update', async t => {
   const newData = {
     id: test.idUser,
     usuario,
-    id_rol: 1
+    id_persona: 1,
+    nombres: 'Juan',
+    id_rol: 1,
+    id_entidad: 1
   };
 
   let res = await Usuario.createOrUpdate(newData);
-
   t.is(res.code, 1, 'Respuesta correcta');
   t.is(res.data.usuario, newData.usuario, 'Actualizando registro usuario');
   t.is(res.message, 'OK', 'Mensaje correcto');

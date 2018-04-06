@@ -3,11 +3,11 @@ module.exports = {
     # Lista de modulos
     modulos(
       # Límite de la consulta para la paginación
-      limit: Int, 
+      limit: Int
       # Nro. de página para la paginación
-      page: Int, 
+      page: Int
       # Campo a ordenar, "-campo" ordena DESC
-      order: String, 
+      order: String
       # Buscar por label
       label: String
       # Buscar por estado

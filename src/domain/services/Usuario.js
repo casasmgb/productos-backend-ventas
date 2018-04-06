@@ -3,7 +3,7 @@
 const debug = require('debug')('base:service:usuario');
 const { text } = require('common');
 module.exports = function userService (repositories, res) {
-  const { usuarios } = repositories;
+  const { usuarios, personas } = repositories;
 
   async function findAll (params = {}, idRol, idEntidad) {
     debug('Lista de usuarios|filtros');
@@ -50,13 +50,80 @@ module.exports = function userService (repositories, res) {
 
     let user;
     try {
-      user = await usuarios.createOrUpdate(data);
+      let persona = {
+        nombres: data.nombres,
+        primer_apellido: data.primer_apellido,
+        segundo_apellido: data.segundo_apellido,
+        nombre_completo: data.nombre_completo,
+        tipo_documento: data.tipo_documento,
+        tipo_documento_otro: data.tipo_documento_otro,
+        nro_documento: data.nro_documento,
+        fecha_nacimiento: data.fecha_nacimiento,
+        movil: data.movil,
+        nacionalidad: data.nacionalidad,
+        pais_nacimiento: data.pais_nacimiento,
+        genero: data.genero,
+        telefono: data.telefono
+      };
+
+      if (data.id_persona) { // Actualizando persona
+        persona.id = data.id_persona;
+        persona.estado = data.estado_persona;
+        persona._user_updated = data._user_updated;
+        persona._updated_at = data._updated_at;
+      } else {
+        persona._user_created = data._user_created;
+      }
+
+      persona = await personas.createOrUpdate(persona);
+
+      let usuario = {
+        usuario: data.usuario,
+        contrasena: data.contrasena,
+        email: data.email,
+        cargo: data.cargo,
+        id_entidad: data.id_entidad,
+        id_rol: data.id_rol,
+        id_persona: persona.id
+      };
+
+      if (data.id) {
+        usuario.id = data.id;
+        usuario.estado = data.estado;
+        usuario._user_updated = data._user_updated;
+        usuario._updated_at = data._updated_at;
+      } else {
+        usuario._user_created = data._user_created;
+      }
+
+      user = await usuarios.createOrUpdate(usuario);
     } catch (e) {
       return res.error(e);
     }
 
     if (!user) {
       return res.error(new Error(`El usuario no pudo ser creado`));
+    }
+
+    return res.success(user);
+  }
+
+  async function update (data) {
+    debug('Actualizar usuario');
+
+    if (!data.id) {
+      return res.error(new Error(`Se necesita el ID del usuario para actualizar el registro`));
+    }
+
+    let user;
+    try {
+      user = await usuarios.createOrUpdate(data);
+    } catch (e) {
+      return res.error(e);
+    }
+
+    if (!user) {
+      return res.error(new Error(`El usuario no pudo ser actualizado`));
     }
 
     return res.success(user);
@@ -130,7 +197,8 @@ module.exports = function userService (repositories, res) {
     createOrUpdate,
     deleteItem,
     userExist,
-    getUser
+    getUser,
+    update
   };
 }
 ;

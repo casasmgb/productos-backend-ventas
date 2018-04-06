@@ -36,7 +36,6 @@ async function setup () {
 
   // Cargando Servicios Iop
   await Iop(configDB);
-
   console.log('Success Infrastructure setup!');
   process.exit(0);
 }

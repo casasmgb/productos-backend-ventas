@@ -21,7 +21,7 @@ module.exports = `
     # página web de Entidad
     web: String
     # Código de portal de trámites de Entidad
-    codigo_portal: String!
+    codigo_portal: String
     # estado de Entidad
     estado: EstadoEntidad!
     # información adicional de la Entidad

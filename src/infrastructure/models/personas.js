@@ -31,16 +31,20 @@ module.exports = (sequelize, DataTypes) => {
       xlabel: lang.t('fields.tipo_documento')
     },
     tipo_documento_otro: {
-      type: DataTypes.STRING(50),
-      xlabel: lang.t('fields.tipo_documento_otro')
+      type: DataTypes.ENUM,
+      values: ['CI', 'PASAPORTE', 'EXTRANJERO'],
+      defaultValue: 'CI',
+      xlabel: lang.t('fields.tipo_documento')
     },
     nro_documento: {
       type: DataTypes.STRING(50),
-      xlabel: lang.t('fields.nro_documento')
+      xlabel: lang.t('fields.nro_documento'),
+      allowNull: false
     },
     fecha_nacimiento: {
       type: DataTypes.DATE,
-      xlabel: lang.t('fields.fecha_nacimiento')
+      xlabel: lang.t('fields.fecha_nacimiento'),
+      allowNull: false
     },
     telefono: {
       type: DataTypes.STRING(50),
@@ -61,7 +65,12 @@ module.exports = (sequelize, DataTypes) => {
     genero: {
       type: DataTypes.ENUM,
       values: ['M', 'F', 'OTRO'],
-      xlabel: lang.t('fields.genero')
+      xlabel: lang.t('fields.genero'),
+      allowNull: false
+    },
+    observacion: {
+      type: DataTypes.TEXT,
+      xlabel: lang.t('fields.observacion')
     },
     estado: {
       type: DataTypes.ENUM,
@@ -75,10 +84,10 @@ module.exports = (sequelize, DataTypes) => {
   // Agregando campos para el log
   fields = util.setTimestamps(fields);
 
-  let Users = sequelize.define('personas', fields, {
+  let Personas = sequelize.define('personas', fields, {
     timestamps: false,
-    tableName: 'sys_personas'
+    tableName: 'personas'
   });
 
-  return Users;
+  return Personas;
 };

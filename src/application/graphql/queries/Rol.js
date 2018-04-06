@@ -3,9 +3,9 @@ module.exports = {
     # Lista de roles
     roles(
       # Límite de la consulta para la paginación
-      limit: Int, 
+      limit: Int
       # Nro. de página para la paginación
-      page: Int, 
+      page: Int
       # Campo a ordenar, "-campo" ordena DESC
       order: String, 
     ): Roles

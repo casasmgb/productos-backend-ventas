@@ -16,7 +16,7 @@ module.exports = function setupResponse (logs) {
       message: error.message || 'ERROR DESCONOCIDO'
     };
 
-    await logs.error(error.message, 'ERROR DOMINIO', error);
+    await logs.error(error.message, 'ERROR DOMINIO - MÓDULO USUARIOS', error);
     return data;
   }
 

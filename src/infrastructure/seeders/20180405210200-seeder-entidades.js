@@ -13,29 +13,35 @@ let items = [
     telefonos: '(+591 -2) 2128706 - (+591 -2) 2128707',
     direccion: 'Sopocachi, Calle Pedro Salazar Nº 631, esq. Andrés Muñoz. Edificio del Fondo Nacional de Desarrollo Regional(FNDR).Pisos 4 y 5',
     web: 'agetic.gob.bo',
-    estado: 'ACTIVO'
+    estado: 'ACTIVO',
+    nit: '100100110010',
+    matricula_comercio: '32323',
+    razon_social: 'Agetic Corp',
+    codigo_portal: 'AGTC'
   }
 ];
 
 // Agregando datos aleatorios para desarrollo
 if (typeof process.env.NODE_ENV === 'undefined' || process.env.NODE_ENV !== 'production') {
-  let personas = Array(9).fill().map((_, i) => {
+  let entidades = Array(9).fill().map((_, i) => {
     let item = {
       nombre: casual.company_name,
       descripcion: casual.text,
       sigla: casual.company_suffix,
       email: casual.email,
-      telefonos: `${casual.phone},${casual.phone}`,
+      telefonos: casual.phone,
       direccion: casual.address,
       web: casual.url,
       estado: 'ACTIVO',
-      subdomain: casual.domain
+      nit: casual.phone,
+      matricula_comercio: casual.phone,
+      razon_social: casual.name
     };
 
     return item;
   });
 
-  items = items.concat(personas);
+  items = items.concat(entidades);
 }
 
 // Asignando datos de log y timestamps a los datos
@@ -43,7 +49,7 @@ items = setTimestampsSeeder(items);
 
 module.exports = {
   up (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('sys_entidades', items, {});
+    return queryInterface.bulkInsert('entidades', items, {});
   },
 
   down (queryInterface, Sequelize) { }

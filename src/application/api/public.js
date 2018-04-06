@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('base:api');
+const debug = require('debug')('base:api:public');
 const { generateToken, generateTokenSolicitante } = require('../lib/auth');
 
 module.exports = services => {
@@ -29,11 +29,12 @@ module.exports = services => {
 
       // Actualizando el último login
       const now = new Date();
-      await Usuario.createOrUpdate({
+      await Usuario.update({
         id: user.id,
         ultimo_login: now
       });
-      Log.info(`El usuario: ${usuario} ingresó al sistema a las ${now}`, 'LOGIN', null, usuario);
+      const ip = req.connection.remoteAddress;
+      Log.info(`El usuario: ${usuario} ingresó al sistema a las ${now}`, 'LOGIN', null, usuario, ip);
 
       // Obteniendo menu
       let menu = await Modulo.getMenu(user.id_rol);
@@ -66,7 +67,7 @@ module.exports = services => {
           'nombres': user['persona.nombres'],
           'primer_apellido': user['persona.primer_apellido'],
           'segundo_apellido': user['persona.segundo_apellido'],
-          'email': user['persona.email'],
+          'email': user.email,
           'id_entidad': user.id_entidad,
           'id_rol': user.id_rol,
           'entidad': user['entidad.nombre'],

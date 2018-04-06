@@ -45,6 +45,20 @@ module.exports = function usuariosRepository (models, Sequelize) {
       }
     ];
 
+    if (params.nombre_completo) {
+      query.where[Op.or] = [
+        { '$persona.nombres$': {
+          [Op.iLike]: `%${params.nombre_completo}%` }
+        },
+        { '$persona.primer_apellido$': {
+          [Op.iLike]: `%${params.nombre_completo}%` }
+        },
+        { '$persona.segundo_apellido$': {
+          [Op.iLike]: `%${params.nombre_completo}%` }
+        }
+      ];
+    }
+
     if (params.usuario) {
       query.where.usuario = {
         [Op.iLike]: `%${params.usuario}%`
@@ -186,6 +200,9 @@ module.exports = function usuariosRepository (models, Sequelize) {
     if (item) {
       let updated;
       try {
+        if (usuario.contrasena) {
+          usuario.contrasena = text.encrypt(usuario.contrasena);
+        }
         updated = await usuarios.update(usuario, cond);
       } catch (e) {
         errorHandler(e);

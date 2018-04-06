@@ -24,6 +24,7 @@ module.exports = async function () {
 
   // Cargando modelos de la capa de infrastructura
   services._models = repositories._models;
+  services._repositories = repositories;
 
   return services;
 };

@@ -3,11 +3,11 @@ module.exports = {
     # Lista de permisos
     permisos(
       # Límite de la consulta para la paginación
-      limit: Int, 
+      limit: Int
       # Nro. de página para la paginación
-      page: Int, 
+      page: Int
       # Campo a ordenar, "-campo" ordena DESC
-      order: String, 
+      order: String
       # Buscar por id_modulo
       id_modulo: Int
     ): Permisos

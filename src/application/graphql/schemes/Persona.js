@@ -3,7 +3,7 @@ module.exports = `
   type Persona {
     # ID del persona
     id: ID!    
-    # Correo electrónico del persona    
+    # nombre(s)    
     nombres: String!
     # Primer apellido
     primer_apellido: String

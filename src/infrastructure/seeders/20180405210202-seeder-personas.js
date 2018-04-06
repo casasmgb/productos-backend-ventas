@@ -11,7 +11,6 @@ let items = [
     segundo_apellido: '',
     nombre_completo: 'Administrador del sistema',
     tipo_documento: 'CI',
-    tipo_documento_otro: '',
     nro_documento: '123456',
     fecha_nacimiento: new Date(1990, 0, 1),
     telefono: '123456',
@@ -32,7 +31,6 @@ if (typeof process.env.NODE_ENV === 'undefined' || process.env.NODE_ENV !== 'pro
       segundo_apellido: casual.last_name,
       nombre_completo: casual.full_name,
       tipo_documento: casual.random_element(['CI', 'PASAPORTE', 'EXTRANJERO']),
-      tipo_documento_otro: '',
       nro_documento: casual.integer(1, 20),
       fecha_nacimiento: casual.date('YYYY-MM-DD'),
       telefono: casual.phone,
@@ -54,7 +52,7 @@ items = setTimestampsSeeder(items);
 
 module.exports = {
   up (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('sys_personas', items, {});
+    return queryInterface.bulkInsert('personas', items, {});
   },
 
   down (queryInterface, Sequelize) { }

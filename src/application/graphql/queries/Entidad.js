@@ -3,11 +3,11 @@ module.exports = {
     # Lista de entidades
     entidades(
       # Límite de la consulta para la paginación
-      limit: Int, 
+      limit: Int
       # Nro. de página para la paginación
-      page: Int, 
+      page: Int
       # Campo a ordenar, "-campo" ordena descendentemente
-      order: String,  
+      order: String
       # Buscar por nombre
       nombre: String
       # Buscar por sigla

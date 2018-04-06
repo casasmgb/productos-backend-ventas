@@ -1,7 +1,6 @@
 'use strict';
 
-const debug = require('debug')('base:api:modulo');
-const { text } = require('common');
+const debug = require('debug')('base:api:system');
 const { userData, generateToken } = require('../lib/auth');
 
 module.exports = services => {
@@ -40,29 +39,22 @@ module.exports = services => {
   async function cambiarContrasena (req, res, next) {
     debug('Cambiar contraseña de usuario');
     const { Usuario } = services;
-    const idUser = parseInt(req.params.user_id);
     const { password, newPassword } = req.body;
-    let userFound = await Usuario.findById(idUser);
 
-    if (userFound.data.contrasena === text.encrypt(password)) {
-      let updateUsrObj = {
-        id: idUser,
-        contrasena: text.encrypt(newPassword)
-      };
-      try {
-        await Usuario.createOrUpdate(updateUsrObj);
-        res.send({
-          finalizado: true,
-          mensaje: 'Contraseña actualizada exitosamente.'
+    try {
+      let _user = await userData(req, services);
+      let user = await Usuario.userExist(_user.usuario, password);
+      if (user.code === 1) {
+        await Usuario.update({
+          id: _user.id,
+          contrasena: newPassword
         });
-      } catch (e) {
-        return next(e);
+        res.send({ message: 'Contraseña cambiada correctamente' });
+      } else {
+        res.send({ error: 'Su contraseña anterior es incorrecta' });
       }
-    } else {
-      res.send({
-        finalizado: false,
-        mensaje: 'Contraseña original no coincide.'
-      });
+    } catch (e) {
+      return next(e);
     }
   }
 
@@ -70,29 +62,21 @@ module.exports = services => {
   async function desactivarCuenta (req, res, next) {
     debug('Desactivar cuenta de usuario');
     const { Usuario } = services;
-    const idUser = parseInt(req.params.user_id);
     const { password } = req.body;
-    let userFound = await Usuario.findById(idUser);
-
-    if (userFound.data.contrasena === text.encrypt(password)) {
-      let updateUsrObj = {
-        id: idUser,
-        estado: 'INACTIVO'
-      };
-      try {
-        await Usuario.createOrUpdate(updateUsrObj);
-        res.send({
-          finalizado: true,
-          mensaje: 'Cuenta desactivada exitosamente.'
+    try {
+      let _user = await userData(req, services);
+      let user = await Usuario.userExist(_user.usuario, password);
+      if (user.code === 1) {
+        await Usuario.update({
+          id: _user.id,
+          estado: 'INACTIVO'
         });
-      } catch (e) {
-        return next(e);
+        res.send({ message: '¡Cuenta desactivada!' });
+      } else {
+        res.send({ error: 'Su contraseña es incorrecta' });
       }
-    } else {
-      res.send({
-        finalizado: false,
-        mensaje: 'La contraseña no coincide.'
-      });
+    } catch (e) {
+      return next(e);
     }
   }
 

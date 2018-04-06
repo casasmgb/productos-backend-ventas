@@ -35,7 +35,7 @@ module.exports = async function (config) {
 
   // Cargando todos los repositorios que se encuentran en la carpeta repositories y en sus subcarpetas
   let repositories = util.loadRepositories(path.join(__dirname, 'repositories'), models, Sequelize, { exclude: ['index.js'] });
-  debug('Capa infraestructura - Repositorios cargados correctamente');
+  debug('Capa infraestructura - Usuarios - Repositorios cargados correctamente');
 
   await sequelize.authenticate();
 

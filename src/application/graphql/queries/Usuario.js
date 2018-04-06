@@ -3,11 +3,11 @@ module.exports = {
     # Lista de usuarios
     usuarios(
       # Límite de la consulta para la paginación
-      limit: Int, 
+      limit: Int 
       # Nro. de página para la paginación
-      page: Int, 
+      page: Int 
       # Campo a ordenar, "-campo" ordena DESC
-      order: String, 
+      order: String
       # Buscar por usuario
       usuario: String, 
       # Buscar por email
@@ -29,6 +29,8 @@ module.exports = {
     usuarioAdd(usuario: NewUsuario): Usuario
     # Editar usuario
     usuarioEdit(id: Int!, usuario: EditUsuario): Usuario
+    # Editar usuario
+    usuarioUpdate(id: Int!, usuario: EditUsuario): Usuario
     # Eliminar usuario
     usuarioDelete(id: Int!): Delete
   `

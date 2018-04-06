@@ -13,20 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.geo.gob.bo:base/base-usuarios.git"
+    "url": "git@gitlab.geo.gob.bo:agetic/sedem2-backend-subsidio.git"
   },
   "keywords": [
     "Módulo",
     "usuario"
   ],
-  "author": "Equipo G <eg@agetic.gob.bo>",
+  "author": "EG <eg@agetic.gob.bo>",
   "license": "MIT",
   "dependencies": {
     "app-iop": "git+ssh://git@gitlab.geo.gob.bo:base/app-iop.git",
     "app-logs": "^1.1.4",
     "app-params": "^0.2.1",
     "casual": "^1.5.19",
-    "common": "file:../common",
+    "common": "file:../productos-common",
     "defaults": "^1.0.3",
     "graphql": "^0.13.1",
     "inquirer": "^5.1.0",

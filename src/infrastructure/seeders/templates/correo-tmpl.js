@@ -6,7 +6,7 @@ module.exports = `
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Apostilla - Bolivia</title>
+  <title>App - Bolivia</title>
 </head>
 <body style="font: 16px normal Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background-color: #FAF7F9; color: #7e4e6e;">
   <div class="container" style="margin: 0 auto; width: 100%; max-width: 640px; box-shadow: 0 0 20px 0 rgba(62, 28, 131, 0.1); background-color: #ffffff; border-radius: 3px;">

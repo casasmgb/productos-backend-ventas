@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     contrasena: {
       type: DataTypes.STRING(255),
-      allowNull: false,
       xlabel: lang.t('fields.contrasena')
     },
     email: {

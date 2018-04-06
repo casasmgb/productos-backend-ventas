@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     descripcion: {
       type: DataTypes.TEXT,
-      allowNull: false,
       xlabel: lang.t('fields.descripcion')
     },
     sigla: {
@@ -22,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING(100),
-      xlabel: lang.t('fields.email')
+      xlabel: lang.t('fields.email'),
+      allowNull: false
     },
     telefonos: {
       type: DataTypes.STRING(100),
@@ -30,11 +30,27 @@ module.exports = (sequelize, DataTypes) => {
     },
     direccion: {
       type: DataTypes.TEXT,
-      xlabel: lang.t('fields.direccion')
+      xlabel: lang.t('fields.direccion'),
+      allowNull: false
     },
     web: {
       type: DataTypes.STRING(100),
       xlabel: lang.t('fields.web')
+    },
+    nit: {
+      type: DataTypes.STRING(100),
+      xlabel: lang.t('fields.nit'),
+      allowNull: false
+    },
+    matricula_comercio: {
+      type: DataTypes.STRING(100),
+      xlabel: lang.t('fields.matricula_comercio'),
+      allowNull: false
+    },
+    razon_social: {
+      type: DataTypes.STRING(100),
+      xlabel: lang.t('fields.razon_social'),
+      allowNull: false
     },
     estado: {
       type: DataTypes.ENUM,
@@ -42,14 +58,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'ACTIVO',
       allowNull: false,
       xlabel: lang.t('fields.estado')
-    },
-    info: {
-      type: DataTypes.JSON,
-      xlabel: lang.t('fields.info')
-    },
-    subdomain: {
-      type: DataTypes.STRING(20),
-      xlabel: lang.t('fields.subdomain')
     },
     codigo_portal: {
       type: DataTypes.STRING(20),
@@ -63,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
 
   let Entidades = sequelize.define('entidades', fields, {
     timestamps: false,
-    tableName: 'sys_entidades'
+    tableName: 'entidades'
   });
 
   return Entidades;
