@@ -1,0 +1,44 @@
+{
+  "name": "base-usuarios",
+  "version": "1.0.0",
+  "description": "Módulo de usuarios",
+  "main": "src/application/index.js",
+  "scripts": {
+    "test": "npm run setup && npm run seeders && npm run test-db && npm run test-domain",
+    "test-db": "ava src/infrastructure/tests/ --verbose",
+    "test-domain": "ava src/domain/tests/ --verbose",
+    "setup": "DEBUG=base:* node src/infrastructure/setup.js",
+    "seeders": "sequelize db:seed:all --seeders-path src/infrastructure/seeders --config src/infrastructure/lib/config-seeders.js",
+    "lint": "semistandard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.geo.gob.bo:base/base-usuarios.git"
+  },
+  "keywords": [
+    "Módulo",
+    "usuario"
+  ],
+  "author": "Equipo G <eg@agetic.gob.bo>",
+  "license": "MIT",
+  "dependencies": {
+    "app-iop": "git+ssh://git@gitlab.geo.gob.bo:base/app-iop.git",
+    "app-logs": "^1.1.4",
+    "app-params": "^0.2.1",
+    "casual": "^1.5.19",
+    "common": "file:../common",
+    "defaults": "^1.0.3",
+    "graphql": "^0.13.1",
+    "inquirer": "^5.1.0",
+    "jsonwebtoken": "^8.2.0",
+    "minimist": "^1.2.0",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.33.4",
+    "sequelize-cli": "^4.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "semistandard": "^12.0.0"
+  }
+}
