@@ -1,7 +1,6 @@
 'use strict';
 
 const Params = require('app-params');
-const Iop = require('app-iop');
 const minimist = require('minimist');
 const inquirer = require('inquirer');
 const { errors, config } = require('common');
@@ -34,8 +33,6 @@ async function setup () {
   configDB.force = true;
   await Params(configDB);
 
-  // Cargando Servicios Iop
-  await Iop(configDB);
   console.log('Success Infrastructure setup!');
   process.exit(0);
 }

@@ -3,7 +3,6 @@
 const domain = require('../domain');
 const Params = require('app-params');
 const Logs = require('app-logs');
-const Iop = require('app-iop');
 const { config } = require('common');
 const Api = require('./api');
 const Graphql = require('./graphql');
@@ -20,9 +19,6 @@ module.exports = async function setupModule () {
     // Agregando Logs a los servicios
     services.Log = await Logs(config.db);
 
-    // Agregando Iop a los servicios
-    services.Iop = await Iop(config.db);
-
     // Cargando API-REST
     const api = Api(services);
 
@@ -34,9 +30,6 @@ module.exports = async function setupModule () {
 
     // Uniendo Graphql de usuarios con Graphql de Logs
     mergeGraphql(graphql, services.Log.graphql, ['DateL']);
-
-    // Uniendo Graphql de usuarios con Graphql de Iop
-    mergeGraphql(graphql, services.Iop.graphql, ['DateI']);
 
     return {
       services,

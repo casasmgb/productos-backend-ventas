@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.geo.gob.bo:agetic/sedem2-backend-subsidio.git"
+    "url": "https://github.com/casasmgb/productos-backend-ventas.git"
   },
   "keywords": [
     "Módulo",
@@ -22,7 +22,6 @@
   "author": "EG <eg@agetic.gob.bo>",
   "license": "MIT",
   "dependencies": {
-    "app-iop": "git+ssh://git@gitlab.geo.gob.bo:base/app-iop.git",
     "app-logs": "^1.1.4",
     "app-params": "^0.2.1",
     "casual": "^1.5.19",
